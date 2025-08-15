@@ -37,7 +37,6 @@ const Agent = ({
 
   useEffect(() => {
     const onCallStart = () => {
-      debugger
       setCallStatus(CallStatus.ACTIVE);
     };
 
@@ -118,24 +117,13 @@ const Agent = ({
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);
 
-    debugger
     if (type === "generate") {
-      await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, 
-        // {
-        //   recordingEnabled: false,
-        //   variableValues: {
-        //     name: 'John',
-        //   },
-        // }
-        {
-          variableValues: {
-            // name: 'John',
-            username: userName,
-            userid: userId,
-          },
-        }
-      );
-      
+      await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+        variableValues: {
+          username: userName,
+          userid: userId,
+        },
+      });
     } else {
       let formattedQuestions = "";
       if (questions) {
@@ -144,7 +132,6 @@ const Agent = ({
           .join("\n");
       }
 
-      debugger
       await vapi.start(interviewer, {
         variableValues: {
           questions: formattedQuestions,
@@ -171,7 +158,6 @@ const Agent = ({
               height={54}
               className="object-cover"
             />
-            <span className="animate-speak" />
             {isSpeaking && <span className="animate-speak" />}
           </div>
           <h3>AI Interviewer</h3>
