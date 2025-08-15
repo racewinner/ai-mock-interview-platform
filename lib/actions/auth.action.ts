@@ -68,7 +68,6 @@ export async function signUp(params: SignUpParams) {
 }
 
 export async function signIn(params: SignInParams) {
-  debugger
   const { email, idToken } = params;
   try {
     const userRecord = await auth.getUserByEmail(email);
