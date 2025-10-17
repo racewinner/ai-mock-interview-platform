@@ -1,0 +1,197 @@
+# VAPI Custom Tool Execution
+
+## When Custom Tools Execute
+
+Custom tools in VAPI execute automatically when:
+
+### 1. **AI Determines Tool is Needed**
+The AI model decides to call your function based on:
+- User's spoken request matching tool description
+- Conversation context requiring the tool's functionality
+- AI reasoning that the tool would help answer the user's question
+
+### 2. **Explicit User Requests**
+When users say things like:
+- "Save my information"
+- "Send me an email"
+- "Book an appointment"
+- "Get my account details"
+
+### 3. **Conversation Flow Triggers**
+Based on your system prompt logic:
+- Reaching certain conversation milestones
+- Completing specific workflows
+- Meeting conditional criteria you've defined
+
+## Tool Execution Flow
+
+```
+User speaks → AI processes → Determines tool needed → Calls function → Gets result → Continues conversation
+```
+
+## Example Custom Tool Configuration
+
+```json
+{
+  "type": "function",
+  "function": {
+    "name": "save_interview_results",
+    "description": "Save completed interview data with scores and recommendations",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "job_title": {
+          "type": "string",
+          "description": "The job title the user is interviewing for"
+        },
+        "scores": {
+          "type": "object",
+          "description": "Competency scores from the interview"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Specific recommendations for improvement"
+        }
+      },
+      "required": ["job_title", "scores", "recommendations"]
+    }
+  }
+}
+```
+
+## System Prompt Instructions for Tool Execution
+
+```
+TOOL USAGE PROTOCOL:
+
+AUTOMATIC EXECUTION:
+When the interview is complete, automatically call save_interview_results with:
+- All collected job information
+- Calculated competency scores
+- Generated recommendations
+
+DO NOT ask user permission to save data - execute the function when interview ends.
+
+CONDITIONAL EXECUTION:
+If user asks "How am I doing so far?" during interview:
+→ Call get_current_progress function
+
+If user says "I need to reschedule":
+→ Call schedule_followup function
+
+TOOL CALL TIMING:
+- save_interview_results: Call immediately after final question, before saying goodbye
+- get_user_profile: Call at start if user mentions previous interviews
+- send_report: Call only if user explicitly requests email report
+```
+
+## Common Tool Execution Patterns
+
+### End-of-Conversation Tools
+```
+CONVERSATION ENDING PROTOCOL:
+1. Complete final interview question
+2. Process all collected data  
+3. Call save_interview_results function
+4. Wait for function response
+5. Say: "Thanks—your results have been saved and will be available in your dashboard"
+```
+
+### Mid-Conversation Tools
+```
+DYNAMIC TOOL USAGE:
+IF user says "Can you email me this?":
+  → Call send_email_report function immediately
+  
+IF user asks "What's my previous interview score?":
+  → Call get_interview_history function
+  → Use results in response
+```
+
+### Conditional Tool Execution
+```
+SMART TOOL TRIGGERING:
+IF interview_progress >= 80% AND user_struggling == true:
+  → Call get_coaching_tips function
+  → Provide encouragement based on results
+
+IF technical_question AND user_confused:
+  → Call simplify_question function
+  → Rephrase using simpler terms
+```
+
+## Tool Response Handling
+
+Your custom tool should return data that the AI can use:
+
+```json
+// Tool returns this to AI
+{
+  "success": true,
+  "data": {
+    "interview_id": "12345",
+    "saved_at": "2024-01-15T10:30:00Z"
+  },
+  "message": "Interview results saved successfully"
+}
+```
+
+## Tool Execution in Your Next.js Backend
+
+```typescript
+// app/api/vapi/tools/save-interview/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function POST(request: NextRequest) {
+  try {
+    const { job_title, scores, recommendations } = await request.json()
+    
+    // Save to database
+    const result = await db.interviews.create({
+      data: {
+        jobTitle: job_title,
+        scores: scores,
+        recommendations: recommendations,
+        completedAt: new Date()
+      }
+    })
+
+    // Return response that AI can use
+    return NextResponse.json({
+      success: true,
+      data: {
+        interview_id: result.id,
+        saved_at: result.completedAt
+      },
+      message: "Interview results saved successfully"
+    })
+
+  } catch (error) {
+    return NextResponse.json({
+      success: false,
+      error: "Failed to save interview results"
+    }, { status: 500 })
+  }
+}
+```
+
+## Debugging Tool Execution
+
+Add this to your system prompt for debugging:
+
+```
+TOOL EXECUTION DEBUGGING:
+Before calling any function, say: "Let me save this information for you"
+After function completes successfully, say: "Done! I've saved your interview results"
+If function fails, say: "I had trouble saving that - but don't worry, I still have your feedback"
+```
+
+## Key Points:
+
+- **Automatic**: AI decides when to call tools based on conversation context
+- **Invisible**: Users don't see the function calls happening
+- **Real-time**: Tools execute during the conversation, not after
+- **Response-driven**: Tool responses influence what AI says next
+
+The AI will call your custom tools automatically when it determines they're needed based on the conversation flow and your tool descriptions. You don't need to manually trigger them.

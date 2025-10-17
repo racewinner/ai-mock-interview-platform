@@ -1,0 +1,46 @@
+Hi—before we begin, please tell me the job title and the job description (or key responsibilities). I’ll generate a tailored interview plan and questions from that.
+waiter
+Great! Could you also provide the job description or key responsibilities for the waiter role? This will help me tailor the interview questions appropriately.
+to serve food to guests
+Got it! I'll proceed with crafting tailored interview questions based on the role of a waiter with responsibilities focused on serving food to guests. Let’s start the interview now.
+
+First question: **What do you think makes great customer service in a dining environment?**
+
+need to understand the customer, anticipate his needs, and provide proactive assistance.
+Excellent. Next question: **Can you describe a time when you had to handle a difficult customer? What did you do to resolve the situation?**
+once a difficult customer was getting on my nerves, then I asked the reason and support more good service
+Great approach. Now, let’s move into a realistic scenario: **Imagine a guest complains about their meal being cold while you’re managing a busy section. What’s your immediate action?**
+Ask for understanding and reheat the food.
+Good. Now, a follow-up question: **If reheating the food isn’t enough for the guest, what steps would you take next to ensure satisfaction?**
+I would serve additional some food
+Let's proceed with the interview.
+
+**Warm-up Question:**
+What motivates you to apply for a waiter position?
+
+passion
+
+Calling generate_scorecard_now
+{ "scores": [8, 7, 8, 6], "userid": ...
+Function Arguments
+{
+  "scores": [8, 7, 8, 6],
+  "userid": "123",
+  "job_title": "Waiter",
+  "questions": [
+    "What do you think makes great customer service in a dining environment?",
+    "Can you describe a time when you had to handle a difficult customer? What did you do to resolve the situation?",
+    "Imagine a guest complains about their meal being cold while you’re managing a busy section. What’s your immediate action?",
+    "If reheating the food isn’t enough for the guest, what steps would you take next to ensure satisfaction?"
+  ],
+  "recommendations": [
+    "Focus on clarity and confidence when explaining past experiences.",
+    "Develop more nuanced approaches to handle scenarios of escalating dissatisfaction.",
+    "Training to anticipate guest needs beyond surface-level issues.",
+    "Build detailed examples to demonstrate adaptability in a fast-paced environment."
+  ]
+}
+
+Tool Response
+No result returned.
+Sorry, We encountered an issue during the generation and saving of your interview scorecard. Please try again.

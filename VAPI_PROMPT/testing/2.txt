@@ -1,0 +1,61 @@
+Hi—before we begin, please tell me the job title and the job description (or key responsibilities). I’ll generate a tailored interview plan and questions from that.
+web developer
+Thank you! Could you provide a brief job description for the role? Specifically, what are the primary responsibilities, skills, and tools required?
+I develop the ecommerce web site
+Got it! To clarify, are you responsible for the full-stack development (front-end and back-end) or specific areas of web development, like front-end design, integration, or maintaining performance/security? Any particular technologies or frameworks involved would also help refine the interview questions.
+frontend design
+Thank you for the information. Based on the job title "Frontend Web Developer" for developing an ecommerce website, I will tailor the interview questions accordingly.
+
+Let’s start with the interview.
+
+**Warm-up Question:**
+Can you briefly describe your previous experience in web development?
+
+I developed several ecommerce web site. so I redesigned the UI front end from figma design. and implemented the integration API.
+Great, thanks for sharing that.
+
+**Competency Question - Communication:**
+How do you ensure effective communication with designers when translating Figma designs into code?
+
+tell the designer the problems that can occur during translating
+Good response!
+
+**Follow-Up Question - Communication:**
+What steps do you take to ensure alignment with the designer's vision during implementation?
+
+I consult the detail elements
+Excellent approach!
+
+**Scenario-Based Question:**
+Imagine a situation where the API you need to integrate is delayed. How would you handle this situation while ensuring project timelines are maintained?
+
+I make the my own emulate-API that take the same parameters with delayed API and testing by using it.
+That sounds like a practical solution.
+
+**Closing Question:**
+What tools or frameworks do you prefer for front-end development, and why?
+
+next.js, it provides SSR so it speeds up the initial load time and provide good SEO
+
+Calling generate_scorecard_now
+{ "scores": [8, 9, 8, 9, 8], "userid...
+Function Arguments
+{
+  "scores": [8, 9, 8, 9, 8],
+  "userid": "user123",
+  "job_title": "Frontend Web Developer",
+  "questions": [
+    "Can you briefly describe your previous experience in web development?",
+    "How do you ensure effective communication with designers when translating Figma designs into code?",
+    "What steps do you take to ensure alignment with the designer's vision during implementation?",
+    "Imagine a situation where the API you need to integrate is delayed. How would you handle this situation while ensuring project timelines are maintained?",
+    "What tools or frameworks do you prefer for front-end development, and why?"
+  ],
+  "recommendations": [
+    "Focus more on explaining specific challenges or problem-solving approaches in your past experience.",
+    "Elaborate further on proactive methods to verify design and implementation alignment.",
+    "Consider sharing examples of past collaboration with backend teams when discussing API delays.",
+    "Expand on why you choose specific tools and the measurable benefits they bring.",
+    "Think about detailing any innovative solutions you've implemented in similar contexts."
+  ]
+}
